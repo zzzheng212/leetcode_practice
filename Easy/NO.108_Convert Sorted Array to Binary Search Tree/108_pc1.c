@@ -1,0 +1,22 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+ //高度平衡為使左右樹高度差一以內
+struct TreeNode* buildtree(int* nums, int left, int right);
+struct TreeNode* sortedArrayToBST(int* nums, int numsSize) {
+    return buildtree(nums,0,numsSize-1);
+}
+struct TreeNode* buildtree(int* nums, int left, int right){
+    if(left > right) return NULL;
+    int mid = (left + right)/2;
+    struct TreeNode* NewNode = malloc(sizeof(struct TreeNode));
+    NewNode->val = nums[mid];
+    NewNode->left = buildtree(nums, left, mid-1);
+    NewNode->right = buildtree(nums,mid+1, right);
+    return NewNode; 
+}
